@@ -1,4 +1,4 @@
-# SQL-Injection
+# SQL Injection
 ITIS 3200 Group Project
 
 Topic: SQL Injection Remediation for a Given Vulnerable Query Layer
@@ -11,8 +11,8 @@ Group Members:
 - Everett Pohl (epohl@charlotte.edu)
 - Nikhil Vundela (nvundela@charlotte.edu)
 
-[Project Proposal](N/A)
+[Project Proposal](docs/course_proposal.pdf)
 
-[Project Code](N/A)
+[Project Code](code)
 
 [Project Final Report](N/A)
