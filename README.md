@@ -11,6 +11,10 @@ Group Members:
 - Everett Pohl (epohl@charlotte.edu)
 - Nikhil Vundela (nvundela@charlotte.edu)
 
+Prerequisite: Install the Python/SQL Connector package:
+
+```pip install mysql-connector-python```
+
 [Project Proposal](docs/course_proposal.pdf)
 
 [Project Code](code)
