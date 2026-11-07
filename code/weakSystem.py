@@ -19,15 +19,12 @@ def prepare_query(table:str, id:int)->str:
                  "WHERE record_id = '" + str(id) + "'")
     return query
 
-def execute_query(connection:conn.MySQLConnection, query:str)->list:
+def execute_query(connection:conn.MySQLConnection, query:str):
     cursor = connection.cursor()
     # Fault: Executes a non-prepared query
     cursor.execute(query)
     # Fault: does not limit/restrict query response
     response = cursor.fetchall()
-    cursor.close()
-    return response
-
-def read_response(response:list):
     for row in response:
         print(row)
+    cursor.close()
