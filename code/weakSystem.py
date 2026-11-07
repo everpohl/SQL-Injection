@@ -1,4 +1,4 @@
-import mysql.connector as conn
+from mysql.connector import MySQLConnection
 
 def prepare_query(table:str, id:int)->str:
     # Fault: Checks for validity of legit input but not for potential injection
@@ -19,7 +19,7 @@ def prepare_query(table:str, id:int)->str:
                  "WHERE record_id = '" + str(id) + "'")
     return query
 
-def execute_query(connection:conn.MySQLConnection, query:str):
+def execute_query(connection:MySQLConnection, query:str):
     cursor = connection.cursor()
     # Fault: Executes a non-prepared query
     cursor.execute(query)
