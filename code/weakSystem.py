@@ -13,7 +13,7 @@ def prepare_query(table:str, id:int)->str:
         query = ("SELECT name, price, description FROM products " +
                  "WHERE product_id = '" + str(id) + "'")
     else:
-        # Fault: Does not prepare query, just appends input
+        # Fault: Does not utilize SQL's prepare, just appends input
         query = ("SELECT B.username, A.title, A.secret_value FROM private_records A " +
                  "LEFT JOIN users B ON A.user_id = B.user_id " +
                  "WHERE record_id = '" + str(id) + "'")
@@ -25,6 +25,5 @@ def execute_query(connection:MySQLConnection, query:str):
     cursor.execute(query)
     # Fault: does not limit/restrict query response
     response = cursor.fetchall()
-    for row in response:
-        print(row)
     cursor.close()
+    return response

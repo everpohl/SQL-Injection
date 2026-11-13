@@ -11,9 +11,18 @@ Group Members:
 - Everett Pohl (epohl@charlotte.edu)
 - Nikhil Vundela (nvundela@charlotte.edu)
 
-Prerequisite: Install the Python/SQL Connector package:
+Prerequisite: Install the Python/SQL Connector and Streamlit packages:
 
-```pip install mysql-connector-python```
+```
+pip install mysql-connector-python
+pip install streamlit
+```
+
+Running the Demonstration: Use the following command instead of a normal Python command:
+
+```
+streamlit run main.py
+```
 
 [Project Proposal](docs/course_proposal.pdf)
 

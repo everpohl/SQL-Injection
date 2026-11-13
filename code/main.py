@@ -30,11 +30,16 @@ def main():
         ["Weak System", "Strong System"]
     )
 
-    user_id = st.text_input("Enter a user ID:")
+    table_choice = st.radio(
+        "Choose a table:",
+        ["users", "products", "private_records"]
+    )
+
+    id = st.text_input("Enter a user/product/record ID:")
 
     if st.button("Search"):
-        if user_id.strip() == "":
-            st.warning("Please enter a user ID.")
+        if id.strip() == "":
+            st.warning("Please enter a user/product/record ID.")
             return
 
         connection = None
@@ -43,9 +48,11 @@ def main():
             connection = connect_to_database()
 
             if system_choice == "Weak System":
-                results = weakSystem.search_user(connection, user_id)
+                query = weakSystem.prepare_query(table_choice, id)
+                results = weakSystem.execute_query(connection, query)
             else:
-                results = strongSystem.search_user(connection, user_id)
+                query = strongSystem.prepare_query(table_choice, id)
+                results = strongSystem.execute_query(connection, query)
 
             if results:
                 st.success("User information found.")
