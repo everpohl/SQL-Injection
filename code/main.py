@@ -52,7 +52,7 @@ def main():
                 results = weakSystem.execute_query(connection, query)
             else:
                 query = strongSystem.prepare_query(table_choice, id)
-                results = strongSystem.execute_query(connection, query)
+                results = strongSystem.execute_query(connection, query[0], query[1])
 
             if results:
                 st.success("User information found.")
