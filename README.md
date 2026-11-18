@@ -28,4 +28,6 @@ streamlit run main.py
 
 [Project Code](code)
 
+[MySQL Workbench database setup and demo](sql/README.md)
+
 [Project Final Report](N/A)
