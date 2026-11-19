@@ -5,9 +5,9 @@
 
 from mysql.connector import MySQLConnection
 
-tables = ["users", "products", "private_records"]
+tables = ["users", "products"]
 
-def prepare_query(table: str, id)->tuple[str, tuple]:
+def prepare_query(table: str, id:int)->tuple[str, tuple]:
     if table not in tables:
         raise ValueError("Invalid Table")
     try:
@@ -19,8 +19,6 @@ def prepare_query(table: str, id)->tuple[str, tuple]:
         query = "SELECT username, role, email FROM users WHERE user_id = %s LIMIT 1"
     elif table == tables[1]:
         query = "SELECT name, price, description FROM products WHERE product_id = %s LIMIT 1"
-    else:
-        query = "SELECT B.username, A.title, A.secret_value FROM private_records A LEFT JOIN users B ON A.user_id = B.user_id WHERE record_id = %s LIMIT 1"
     return query, (id,)
 
 def execute_query(connection: MySQLConnection, query: str, id: tuple):

@@ -9,11 +9,6 @@ def prepare_query(table:str, id)->str:
         # Fault: Does not prepare query, just appends input
         query = ("SELECT name, price, description FROM products " +
                  "WHERE product_id = '" + str(id) + "'")
-    else:
-        # Fault: Does not utilize SQL's prepare, just appends input
-        query = ("SELECT B.username, A.title, A.secret_value FROM private_records A " +
-                 "LEFT JOIN users B ON A.user_id = B.user_id " +
-                 "WHERE record_id = '" + str(id) + "'")
     return query
 
 def execute_query(connection:MySQLConnection, query:str):
