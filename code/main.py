@@ -7,14 +7,23 @@ import weakSystem
 import strongSystem
 
 
-def connect_to_database():
-    return mysql.connector.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        port=int(os.getenv("DB_PORT", "3306")),
-        user=os.environ["DB_USER"],
-        password=os.environ["DB_PASSWORD"],
-        database=os.environ["DB_NAME"]
-    )
+def connect_to_database(user:str):
+    if user == "Weak System":
+        return mysql.connector.connect(
+            host='localhost',
+            port=3306,
+            user='course_demo_v00_weak',
+            password='weak',
+            database='course_sql_demo_v00'
+        )
+    else:
+        return mysql.connector.connect(
+            host='',
+            port=3306,
+            user='course_demo_v00_strong',
+            password='strong',
+            database='course_sql_demo_v00'
+        )
 
 
 def main():
@@ -32,20 +41,20 @@ def main():
 
     table_choice = st.radio(
         "Choose a table:",
-        ["users", "products", "private_records"]
+        ["users", "products"]
     )
 
-    id = st.text_input("Enter a user/product/record ID:")
+    id = st.text_input("Enter a user/product ID:")
 
     if st.button("Search"):
         if id.strip() == "":
-            st.warning("Please enter a user/product/record ID.")
+            st.warning("Please enter a user/product ID.")
             return
 
         connection = None
 
         try:
-            connection = connect_to_database()
+            connection = connect_to_database(system_choice)
 
             if system_choice == "Weak System":
                 query = weakSystem.prepare_query(table_choice, id)
@@ -55,7 +64,7 @@ def main():
                 results = strongSystem.execute_query(connection, query[0], query[1])
 
             if results:
-                st.success("User information found.")
+                st.success("Information found.")
 
                 st.dataframe(
                     results,
@@ -63,7 +72,7 @@ def main():
                     hide_index=True
                 )
             else:
-                st.info("No matching user was found.")
+                st.info("No matching information was found.")
 
         except KeyError:
             st.error(

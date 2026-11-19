@@ -1,9 +1,6 @@
 from mysql.connector import MySQLConnection
 
-def prepare_query(table:str, id:int)->str:
-    # Fault: Checks for validity of legit input but not for potential injection
-    if table not in ["users", "products", "private_records"] or id < 0:
-        raise ValueError("Please enter a valid table and id.")
+def prepare_query(table:str, id)->str:
     if table == "users":
         # Fault: Does not prepare query, just appends input
         query = ("SELECT username, role, email FROM users " +
