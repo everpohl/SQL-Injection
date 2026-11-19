@@ -7,10 +7,12 @@ from mysql.connector import MySQLConnection
 
 tables = ["users", "products", "private_records"]
 
-def prepare_query(table: str, id:int)->tuple[str, tuple]:
+def prepare_query(table: str, id)->tuple[str, tuple]:
     if table not in tables:
         raise ValueError("Invalid Table")
-    if isinstance(id, bool) or not isinstance(id, int) or id < 0:
+    try:
+        int(id)
+    except:
         raise ValueError("Invalid ID")
     # Strength: Each query is limited to only 1 return result, additionally input is parameterized, which prevents any of the input from functioning as a sql statement
     if table == tables[0]:
