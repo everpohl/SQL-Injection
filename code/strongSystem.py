@@ -7,7 +7,7 @@ from mysql.connector import MySQLConnection
 
 tables = ["users", "products"]
 
-def prepare_query(table: str, id:int)->tuple[str, tuple]:
+def prepare_query(table: str, id)->tuple[str, tuple]:
     if table not in tables:
         raise ValueError("Invalid Table")
     try:
@@ -21,7 +21,7 @@ def prepare_query(table: str, id:int)->tuple[str, tuple]:
         query = "SELECT name, price, description FROM products WHERE product_id = %s LIMIT 1"
     return query, (id,)
 
-def execute_query(connection: MySQLConnection, query: str, id: tuple):
+def execute_query(connection, query: str, id: tuple):
     # Strength: Uses a prepared cursor, which separates the user data from the SQL command
     cursor = connection.cursor(prepared = True)
     #Strength: Query is parameterized
